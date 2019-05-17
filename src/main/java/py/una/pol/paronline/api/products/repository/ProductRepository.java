@@ -5,6 +5,7 @@
  */
 package py.una.pol.paronline.api.products.repository;
 
+import java.util.Collection;
 import py.una.pol.paronline.commons.domain.repository.Repository;
 
 /**
@@ -14,5 +15,22 @@ import py.una.pol.paronline.commons.domain.repository.Repository;
  * @param <Integer> PK data type
  */
 public interface ProductRepository <Product, Integer> extends Repository<Product, Integer>{
+    
+    /**
+     *
+     * @param name
+     * @return
+     * @throws Exception
+     */
+    public Collection<Product> findByName(String name) throws Exception;
+    
+    
+    /**
+     *
+     * @param category
+     * @return
+     * @throws Exception
+     */
+    public Collection<Product> findByCategory(String category) throws Exception;
     
 }

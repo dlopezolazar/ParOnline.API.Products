@@ -49,11 +49,18 @@ public interface ProductService {
     /**
      *
      * @param nombre
-     * @param apellido
      * @return
      * @throws Exception
      */
-    public Collection<Product> findByNombreApellido(String nombre, String apellido) throws Exception;
+    public Collection<Product> findByName(String nombre) throws Exception;
+    
+    /**
+     *
+     * @param category
+     * @return
+     * @throws Exception
+     */
+    public Collection<Product> findByCategory(String category) throws Exception;
 
     /**
      *

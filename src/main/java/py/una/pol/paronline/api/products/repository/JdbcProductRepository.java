@@ -20,7 +20,7 @@ import py.una.pol.paronline.commons.utils.DataBaseUtil;
  *
  * @author dlopez
  */
-public class JdbcProductRepository  implements ProductRepository<Product, Integer>{
+public class JdbcProductRepository implements ProductRepository<Product, Integer> {
 
     @Override
     public void add(Product entity) {
@@ -117,5 +117,83 @@ public class JdbcProductRepository  implements ProductRepository<Product, Intege
 
         return retValue;
     }
-    
+
+    @Override
+    public Collection<Product> findByName(String name) throws Exception {
+        Collection<Product> retValue = new ArrayList();
+
+        Connection c = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            c = DataBaseUtil.getConnection();
+            pstmt = c.prepareStatement("SELECT * FROM producto WHERE name = ?");
+
+            pstmt.setString(1, name);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("descripcion"), new Category(rs.getInt("id_categoria"), ""), rs.getBigDecimal("precio_unit"), rs.getInt("cantidad")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                DataBaseUtil.closeConnection(c);
+            } catch (SQLException ex) {
+                //Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return retValue;
+    }
+
+    @Override
+    public Collection<Product> findByCategory(String category) throws Exception {
+        Collection<Product> retValue = new ArrayList();
+
+        Connection c = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            c = DataBaseUtil.getConnection();
+            pstmt = c.prepareStatement("SELECT * FROM producto WHERE categoria = ?");
+
+            pstmt.setString(1, category);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("descripcion"), new Category(rs.getInt("id_categoria"), ""), rs.getBigDecimal("precio_unit"), rs.getInt("cantidad")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                DataBaseUtil.closeConnection(c);
+            } catch (SQLException ex) {
+                //Logger.getLogger(UsuarioManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return retValue;
+    }
+
 }

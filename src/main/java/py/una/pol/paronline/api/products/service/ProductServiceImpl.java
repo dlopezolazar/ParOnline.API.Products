@@ -20,11 +20,11 @@ import py.una.pol.paronline.commons.domain.service.BaseService;
 public class ProductServiceImpl extends BaseService<Product, Integer> 
         implements ProductService{
     
-    private ProductRepository<Product, Integer> userRepository;
+    private ProductRepository<Product, Integer> productRepository;
 
     public ProductServiceImpl(ProductRepository<Product, Integer> repository) {
         super(repository);
-        this.userRepository = repository;
+        this.productRepository = repository;
     }
 
     @Override
@@ -40,17 +40,24 @@ public class ProductServiceImpl extends BaseService<Product, Integer>
     @Override
     public Entity findById(Integer id) throws Exception {
         
-        return userRepository.get(id);
+        return productRepository.get(id);
     }
 
     @Override
-    public Collection<Product> findByNombreApellido(String nombre, String apellido) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Collection<Product> findByName(String nombre) throws Exception {
+        
+        return productRepository.findByName(nombre);
     }
 
     @Override
     public Collection<Product> findByCriteria(Map<String, ArrayList<String>> name) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Collection<Product> findByCategory(String category) throws Exception {
+        
+        return productRepository.findByCategory(category);
     }
     
 }
