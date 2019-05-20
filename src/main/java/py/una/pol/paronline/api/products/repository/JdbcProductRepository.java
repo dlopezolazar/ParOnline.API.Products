@@ -91,12 +91,13 @@ public class JdbcProductRepository implements ProductRepository<Product, Integer
 
         try {
             c = DataBaseUtil.getConnection();
-            pstmt = c.prepareStatement("SELECT * FROM producto");
+            pstmt = c.prepareStatement("SELECT p.id_producto, p.descripcion as producto, c.id_categoria, c.descripcion as categoria, p.precio_unit, p.cantidad "+ 
+                            "FROM producto as p JOIN categoria as c ON p.id_categoria = c.id_categoria");
 
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("descripcion"), new Category(rs.getInt("id_categoria"), ""), rs.getBigDecimal("precio_unit"), rs.getInt("cantidad")));
+                retValue.add(new Product(rs.getInt("id_producto"), rs.getString("producto"), new Category(rs.getInt("id_categoria"), rs.getString("categoria")), rs.getBigDecimal("precio_unit"), rs.getInt("cantidad")));
             }
 
         } catch (SQLException e) {
@@ -167,7 +168,7 @@ public class JdbcProductRepository implements ProductRepository<Product, Integer
 
         try {
             c = DataBaseUtil.getConnection();
-            pstmt = c.prepareStatement("SELECT * FROM producto WHERE categoria = ?");
+            pstmt = c.prepareStatement("SELECT * FROM PRODUCTO P JOIN CATEGORIA C ON P.ID_CATEGORIA = C.ID_CATEGORIA WHERE categoria = ?");
 
             pstmt.setString(1, category);
 
