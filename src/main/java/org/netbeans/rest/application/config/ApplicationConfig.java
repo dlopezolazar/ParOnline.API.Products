@@ -29,6 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(py.una.pol.paronline.api.products.rest.CategoryRestService.class);
         resources.add(py.una.pol.paronline.api.products.rest.ProductRestService.class);
     }
     

@@ -17,9 +17,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import py.una.pol.paronline.api.products.entity.Product;
 import py.una.pol.paronline.api.products.repository.JdbcProductRepository;
 import py.una.pol.paronline.api.products.service.ProductServiceImpl;
+import py.una.pol.paronline.commons.domain.entity.products.Product;
 
 /**
  *
@@ -39,12 +39,12 @@ public class ProductRestService {
     }
     
     @GET
-    @Path("/category")
+    @Path("/category/{category_id}")
     @Produces("application/json")
-    public ArrayList<Product> getProductsByCategory(@QueryParam("category_name") String categoryName) {
+    public ArrayList<Product> getProductsByCategoryId(@PathParam("category_name") String categoryId) {
         ArrayList<Product> products = null;
         try {
-            products = (ArrayList) productService.findByCategory(categoryName);
+            products = (ArrayList) productService.findByCategory(categoryId);
         } catch (Exception ex) {
             Logger.getLogger(ProductRestService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -58,6 +58,19 @@ public class ProductRestService {
         Product entity = null;
         try {
             entity = (Product) productService.findById(id);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductRestService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return entity;
+    }
+    
+    @GET
+    @Path("/")
+    @Produces("application/json")
+    public Product getProductByDescripcion(@QueryParam("name") String name) {
+        Product entity = null;
+        try {
+            entity = (Product) productService.findByName(name);
         } catch (Exception ex) {
             Logger.getLogger(ProductRestService.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -22,7 +22,7 @@ public interface ProductRepository <Product, Integer> extends Repository<Product
      * @return
      * @throws Exception
      */
-    public Collection<Product> findByName(String name) throws Exception;
+    public Collection<Product> findByDescripcion(String name) throws Exception;
     
     
     /**
@@ -32,5 +32,13 @@ public interface ProductRepository <Product, Integer> extends Repository<Product
      * @throws Exception
      */
     public Collection<Product> findByCategory(String category) throws Exception;
+    
+    /**
+     * 
+     * @param categoryId
+     * @return
+     * @throws Exception 
+     */
+    public Collection<Product> findByCategoryId(Integer categoryId) throws Exception;
     
 }

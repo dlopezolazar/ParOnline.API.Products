@@ -8,9 +8,9 @@ package py.una.pol.paronline.api.products.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-import py.una.pol.paronline.api.products.entity.Product;
 import py.una.pol.paronline.api.products.repository.ProductRepository;
 import py.una.pol.paronline.commons.domain.entity.Entity;
+import py.una.pol.paronline.commons.domain.entity.products.Product;
 import py.una.pol.paronline.commons.domain.service.BaseService;
 
 /**
@@ -28,13 +28,15 @@ public class ProductServiceImpl extends BaseService<Product, Integer>
     }
 
     @Override
-    public void update(Product user) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Product product) throws Exception {
+        
+        productRepository.update(product);
     }
 
     @Override
     public void delete(Integer id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        productRepository.remove(id);
     }
 
     @Override
@@ -46,7 +48,7 @@ public class ProductServiceImpl extends BaseService<Product, Integer>
     @Override
     public Collection<Product> findByName(String nombre) throws Exception {
         
-        return productRepository.findByName(nombre);
+        return productRepository.findByDescripcion(nombre);
     }
 
     @Override

@@ -9,27 +9,27 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import py.una.pol.paronline.commons.domain.entity.Entity;
-import py.una.pol.paronline.commons.domain.entity.products.Product;
+import py.una.pol.paronline.commons.domain.entity.products.Category;
 
 /**
  *
  * @author dlopez
  */
-public interface ProductService {
+public interface CategoryService{
     
     /**
      *
-     * @param user
+     * @param category
      * @throws Exception
      */
-    public void add(Product user) throws Exception;
+    public void add(Category category) throws Exception;
 
     /**
      *
-     * @param user
+     * @param category
      * @throws Exception
      */
-    public void update(Product user) throws Exception;
+    public void update(Category category) throws Exception;
 
     /**
      *
@@ -45,28 +45,21 @@ public interface ProductService {
      * @throws Exception
      */
     public Entity findById(Integer id) throws Exception;
-
+    
     /**
      *
      * @param nombre
      * @return
      * @throws Exception
      */
-    public Collection<Product> findByName(String nombre) throws Exception;
+    public Collection<Category> findByName(String nombre) throws Exception;
     
-    /**
-     *
-     * @param category
-     * @return
-     * @throws Exception
-     */
-    public Collection<Product> findByCategory(String category) throws Exception;
-
     /**
      *
      * @param name
      * @return
      * @throws Exception
      */
-    public Collection<Product> findByCriteria(Map<String, ArrayList<String>> name) throws Exception;
+    public Collection<Category> findByCriteria(Map<String, ArrayList<String>> name) throws Exception;
+    
 }
